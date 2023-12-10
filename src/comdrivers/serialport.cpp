@@ -33,6 +33,7 @@
 #include "soc/uart_struct.h"
 #include "soc/io_mux_reg.h"
 #include "soc/gpio_sig_map.h"
+#include "rom/gpio.h"
 #include "soc/dport_reg.h"
 #include "soc/rtc.h"
 #include "esp_intr_alloc.h"

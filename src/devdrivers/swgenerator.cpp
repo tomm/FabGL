@@ -33,6 +33,9 @@
 #include "soc/i2s_struct.h"
 #include "soc/i2s_reg.h"
 #include "driver/periph_ctrl.h"
+#include "soc/io_mux_reg.h"
+#include "soc/gpio_sig_map.h"
+#include "rom/gpio.h"
 #include "soc/rtc.h"
 
 #include "fabutils.h"
@@ -184,7 +187,8 @@ void GPIOStream::play(int freq, lldesc_t volatile * dmaBuffers)
 void GPIOStream::stop()
 {
   if (m_DMAStarted) {
-    rtc_clk_apll_enable(false, 0, 0, 0, 0);
+    rtc_clk_apll_coeff_set(0, 0, 0, 0);
+    rtc_clk_apll_enable(false);
     periph_module_disable(PERIPH_I2S1_MODULE);
 
     m_DMAStarted = false;
@@ -206,7 +210,8 @@ void GPIOStream::setupClock(int freq)
   
   I2S1.sample_rate_conf.tx_bck_div_num = 1; // this makes I2S1O_BCK = I2S1_CLK
 
-  rtc_clk_apll_enable(true, p.sdm0, p.sdm1, p.sdm2, p.o_div);
+  rtc_clk_apll_enable(true);
+  rtc_clk_apll_coeff_set(p.o_div, p.sdm0, p.sdm1, p.sdm2);
 
   I2S1.clkm_conf.clka_en = 1;
 }

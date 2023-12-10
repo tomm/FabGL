@@ -44,6 +44,9 @@ extern "C" {
 #include "soc/rtc.h"
 #include "esp_ipc.h"
 #include "soc/adc_channel.h"
+#include "soc/gpio_sig_map.h"
+#include "rom/gpio.h"
+#include "soc/gpio_periph.h"
 
 #include "fabutils.h"
 #include "fabglconf.h"
@@ -1177,7 +1180,7 @@ bool FileBrowser::format(DriveType driveType, int drive)
 
 bool FileBrowser::format(DriveType driveType, int drive)
 {
-  esp_task_wdt_init(45, false);
+  esp_task_wdt_init((esp_task_wdt_config_t*)45);
 
   if (driveType == DriveType::SDCard && s_SDCardMounted) {
 
@@ -1197,10 +1200,12 @@ bool FileBrowser::format(DriveType driveType, int drive)
     }
 
     // make filesystem
-    if (f_mkfs(drv, FM_ANY, 16 * 1024, buffer, FF_MAX_SS) != FR_OK) {
+    /* -TM-
+    if (f_mkfs(drv, FM_ANY, (void*)(16 * 1024), (UINT)buffer, FF_MAX_SS) != FR_OK) {
       free(buffer);
       return false;
     }
+    */
 
     free(buffer);
 

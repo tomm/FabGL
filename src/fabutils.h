@@ -38,6 +38,7 @@
 
 #include <cstring>
 
+#include "esp_spi_flash.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 
@@ -54,6 +55,8 @@
 
 namespace fabgl {
 
+// -TM-
+static inline bool spi_flash_cache_enabled() { return true; }
 
 // manage IDF versioning
 #ifdef ESP_IDF_VERSION

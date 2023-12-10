@@ -141,7 +141,7 @@ static esp_err_t do_single_reloc(ulp_insn_t* program, uint32_t load_addr,
         case SUB_OPCODE_STAGEB:
         case SUB_OPCODE_B: {
             int32_t offset = ((int32_t) label_info.addr) - ((int32_t) branch_info.addr);
-ESP_LOGW(TAG, "%d\n", offset);
+ESP_LOGW(TAG, "%ld\n", offset);
             uint32_t abs_offset = abs(offset);
             uint32_t sign = (offset >= 0) ? 0 : 1;
             if (abs_offset > 127) {
@@ -181,7 +181,7 @@ esp_err_t ulp_process_macros_and_load_ex(uint32_t load_addr, const ulp_insn_t* p
     size_t real_program_size = *psize - macro_count;
     const size_t ulp_mem_end = CONFIG_ULP_COPROC_RESERVE_MEM / sizeof(ulp_insn_t);
     if (load_addr > ulp_mem_end) {
-        ESP_LOGE(TAG, "invalid load address %x, max is %x",
+        ESP_LOGE(TAG, "invalid load address %lx, max is %x",
                 load_addr, ulp_mem_end);
         return ESP_ERR_ULP_INVALID_LOAD_ADDR;
     }

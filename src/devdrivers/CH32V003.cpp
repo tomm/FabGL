@@ -394,7 +394,7 @@ void CH32V003::configureI2C (uint32_t clock)
  */
 void CH32V003::writeI2C (uint8_t address, uint8_t buffer[], uint8_t size)
 {
-	uint8_t spi_send[size+3] = {protocolHeader(MODE_I2C, CMD_I2C_WRITE, DIRECTION_OUT), size+1, address};
+	uint8_t spi_send[size+3] = {protocolHeader(MODE_I2C, CMD_I2C_WRITE, DIRECTION_OUT), (uint8_t)(size+1), address};
 	const int msg_size = sizeof(spi_send)/sizeof(uint8_t);
 	
 	for (int i=0; i<size; i++)
@@ -415,7 +415,7 @@ void CH32V003::writeI2C (uint8_t address, uint8_t buffer[], uint8_t size)
  */
 void CH32V003::readI2C (uint8_t address, uint8_t buffer[], uint8_t size)
 {
-	uint8_t spi_send[] = {protocolHeader(MODE_I2C, CMD_I2C_READ, DIRECTION_IN), size+1, address};
+	uint8_t spi_send[] = {protocolHeader(MODE_I2C, CMD_I2C_READ, DIRECTION_IN), (uint8_t)(size+1), address};
 	const int msg_size = sizeof(spi_send)/sizeof(uint8_t);
 	
 	acquireSPI();
@@ -516,7 +516,7 @@ void CH32V003::configureSPI (uint8_t spi_mode, uint32_t clock)
  */
 void CH32V003::transferSPI8 (uint8_t tx_buffer[], uint8_t rx_buffer[], const uint8_t size)
 {
-	uint8_t spi_send[] = {protocolHeader(MODE_SPI, CMD_SPI_TRANSFER8, DIRECTION_OUT), size+1};
+	uint8_t spi_send[] = {protocolHeader(MODE_SPI, CMD_SPI_TRANSFER8, DIRECTION_OUT), (uint8_t)(size+1)};
 	const int msg_size = sizeof(spi_send)/sizeof(uint8_t);
 	
 	acquireSPI();
@@ -548,7 +548,7 @@ void CH32V003::transferSPI8 (uint8_t tx_buffer[], uint8_t rx_buffer[], const uin
  */
 void CH32V003::transferSPI16 (uint16_t tx_buffer[], uint16_t rx_buffer[], const uint8_t size)
 {
-	uint8_t spi_send[] = {protocolHeader(MODE_SPI, CMD_SPI_TRANSFER16, DIRECTION_OUT), size*2+2};
+	uint8_t spi_send[] = {protocolHeader(MODE_SPI, CMD_SPI_TRANSFER16, DIRECTION_OUT), (uint8_t)(size*2+2)};
 	const int msg_size = sizeof(spi_send)/sizeof(uint8_t);
 	
 	acquireSPI();
@@ -634,7 +634,7 @@ void CH32V003::strWriteUART(char message[])
  */
 uint8_t CH32V003::readUART (uint8_t buff[], uint8_t size)
 {
-	uint8_t spi_send[] = {protocolHeader(MODE_UART, CMD_UART_READ, DIRECTION_IN), size+1};
+	uint8_t spi_send[] = {protocolHeader(MODE_UART, CMD_UART_READ, DIRECTION_IN), (uint8_t)(size+1)};
 	const int msg_size = sizeof(spi_send)/sizeof(uint8_t);
 	
 	acquireSPI();

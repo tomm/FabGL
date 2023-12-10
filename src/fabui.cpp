@@ -23,7 +23,6 @@
   along with FabGL.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/timers.h"
 
@@ -945,10 +944,12 @@ uiTimerHandle uiApp::setTimer(uiEvtHandler * dest, int periodMS)
 
 void uiApp::killTimer(uiTimerHandle handle)
 {
+#if 0 // -TM--
   auto dest = (uiEvtHandler *) pvTimerGetTimerID(handle);
   m_timers.remove(uiTimerAssoc(dest, handle));
   xTimerStop(handle, portMAX_DELAY);
   xTimerDelete(handle, portMAX_DELAY);
+#endif /* 0 */
 }
 
 
@@ -987,6 +988,7 @@ void uiApp::showCaret(uiWindow * window)
 
 void uiApp::suspendCaret(bool value)
 {
+#if 0 // -TM--
   if (m_caretTimer) {
     if (value) {
       if (m_caretInvertState != -1) {
@@ -1002,6 +1004,7 @@ void uiApp::suspendCaret(bool value)
       }
     }
   }
+#endif /* 0 */
 }
 
 
@@ -5383,4 +5386,3 @@ void uiSplitButton::paintButton()
 
 
 } // end of namespace
-

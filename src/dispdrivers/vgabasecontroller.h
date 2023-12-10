@@ -291,6 +291,8 @@ public:
    */
   uint8_t * getScanline(int y)                    { return (uint8_t*) m_viewPort[y]; }
 
+  uint8_t ** getViewPort()                    { return (uint8_t**)m_viewPort; }
+
   /**
    * @brief Creates a raw pixel to use with VGAController.setRawPixel
    *

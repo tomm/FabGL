@@ -25,6 +25,7 @@
 
 #include "wiiNunchuk.h"
 
+#if 0
 namespace fabgl {
 
 WiiNunchuk::WiiNunchuk() :
@@ -231,3 +232,4 @@ void WiiNunchuk::WiiNunchukUpdate(void * arg) {
 }
 
 } // namespace
+#endif /* 0 */

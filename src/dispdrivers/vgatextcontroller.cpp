@@ -7,6 +7,8 @@
 #include "soc/i2s_reg.h"
 #include "driver/periph_ctrl.h"
 #include "soc/rtc.h"
+#include "soc/gpio_sig_map.h"
+#include "rom/gpio.h"
 
 #include "fabutils.h"
 #include "vgatextcontroller.h"
