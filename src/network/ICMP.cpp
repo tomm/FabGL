@@ -30,7 +30,7 @@
 #include "ICMP.h"
 
 #include "Arduino.h"
-#include "WiFiGeneric.h"
+//#include "WiFiGeneric.h"
 
 
 namespace fabgl {
@@ -52,10 +52,12 @@ ICMP::~ICMP()
 // -2 = cannot resolve name
 int ICMP::ping(char const * host)
 {
+#if 0
   IPAddress hostIP((uint32_t)0);
   if (!WiFiGenericClass::hostByName(host, hostIP))
     return -2;
   return ping(hostIP);
+#endif
 }
 
 
